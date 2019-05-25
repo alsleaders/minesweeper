@@ -57,7 +57,7 @@ class Minesweeper extends Component {
   render() {
     return (
       // map through the columns - Done
-      <table>
+      <table id="center-this">
         <tbody>
           {this.state.startGame.map((column, codex) => {
             console.log(codex)

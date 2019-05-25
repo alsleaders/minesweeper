@@ -4,7 +4,7 @@
 
 html {
   height: 100%;
-  background: mediumseagreen;
+  background: 0d21a1;
 }
 
 body {
@@ -12,8 +12,15 @@ body {
   min-height: 100%;
 }
 
+#center-this {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
 #game-boxes {
-  border: solid black 1rem;
-  margin: 1rem;
+  border: groove gray 0.1rem;
+  background-color: gray;
+  margin: 0;
   padding: 1rem;
 }
