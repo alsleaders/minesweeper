@@ -36,15 +36,25 @@ class Minesweeper extends Component {
     // make the left return an api call
     // does the flag on right click need to return an api call?
     return (
-      <div>
-        <table>
-          <tbody>
-            {this.state.startGame.map((column, index) => {
-              console.log(index)
-            })}
-          </tbody>
-        </table>
-      </div>
+      <table>
+        <tbody>
+          {this.state.startGame.map((column, index) => {
+            console.log(index)
+            return (
+              <tr key={index}>
+                {this.state.startGame.map((row, rowdex) => {
+                  console.log({ rowdex })
+                  return (
+                    <td key={rowdex} id="game-boxes">
+                      {rowdex}
+                    </td>
+                  )
+                })}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
     )
   }
 }
