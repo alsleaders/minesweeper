@@ -5,7 +5,8 @@ let stringInterpolationIsBananas = 'https://minesweeper-api.herokuapp.com/games'
 class Minesweeper extends Component {
   state = {
     startGame: [],
-    id: ''
+    id: '',
+    state: ''
   }
 
   componentDidMount() {
@@ -53,7 +54,38 @@ class Minesweeper extends Component {
         })
       })
   }
+
   // does the flag on right click need to return an api call?
+  // make right click flag
+  iGetStrawberriesAsAReward = (rowdex, codex) => {
+    // turn off right click menu
+    console.log(this.state.id)
+    console.log('did this work', rowdex, codex)
+    // make the left return an api call
+    fetch(`${stringInterpolationIsBananas}/${this.state.id}/flag`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ row: rowdex, col: codex })
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(game => {
+        this.setState({
+          startGame: game.board
+        })
+      })
+  }
+  // make reset button
+  // style the flags and bombs
+  // set up difficulty choice before componentDidMount loads - onChange for input or radio buttons
+  // make a win/loss response
+  // restart button
+  // have a win/loss counter (saved in local storage?)
+  // sound effects?
+
   render() {
     return (
       // map through the columns - Done
@@ -73,6 +105,9 @@ class Minesweeper extends Component {
                       id="game-boxes"
                       // make each on click have a left and right
                       onClick={() => this.leftClickOnly(codex, rowdex)}
+                      onContextMenu={() =>
+                        this.iGetStrawberriesAsAReward(codex, rowdex)
+                      }
                     >
                       {this.state.startGame[codex][rowdex]}
                     </td>
