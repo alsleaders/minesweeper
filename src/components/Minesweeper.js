@@ -9,6 +9,13 @@ class Minesweeper extends Component {
     state: ''
   }
 
+  // turn off right click menu
+  // constructor() {
+  //   turnOffMenu = event => {
+  //     event.preventDefault()
+  //   }
+  // }
+
   componentDidMount() {
     fetch(`${stringInterpolationIsBananas}`, {
       method: 'POST',
@@ -21,12 +28,12 @@ class Minesweeper extends Component {
         return response.json()
       })
       .then(game => {
-        console.log({ game })
-        console.log(game.id)
-        console.log(game.mines)
-        console.log(game.state)
-        console.log(game.board)
-        console.log([game.board])
+        // console.log({ game })
+        // console.log(game.id)
+        // console.log(game.mines)
+        // console.log(game.state)
+        // console.log(game.board)
+        // console.log([game.board])
         this.setState({
           startGame: game.board,
           id: game.id
@@ -49,18 +56,18 @@ class Minesweeper extends Component {
         return response.json()
       })
       .then(game => {
+        console.log(game.state)
         this.setState({
           startGame: game.board
         })
       })
   }
-
   // does the flag on right click need to return an api call?
   // make right click flag
   iGetStrawberriesAsAReward = (rowdex, codex) => {
-    // turn off right click menu
+    // turnOffMenu(event)
     console.log(this.state.id)
-    console.log('did this work', rowdex, codex)
+    // console.log('did this work', rowdex, codex)
     // make the left return an api call
     fetch(`${stringInterpolationIsBananas}/${this.state.id}/flag`, {
       method: 'POST',
@@ -78,7 +85,15 @@ class Minesweeper extends Component {
         })
       })
   }
+
   // make reset button
+  resetGame = event => {
+    this.setState = {
+      startGame: [],
+      id: '',
+      state: ''
+    }
+  }
   // style the flags and bombs
   // set up difficulty choice before componentDidMount loads - onChange for input or radio buttons
   // make a win/loss response
@@ -90,33 +105,36 @@ class Minesweeper extends Component {
     return (
       // map through the columns - Done
       <table id="center-this">
-        <tbody>
-          {this.state.startGame.map((column, codex) => {
-            console.log(codex)
-            return (
-              // map through the rows - Done
-              <tr key={codex}>
-                {this.state.startGame.map((row, rowdex) => {
-                  console.log({ rowdex })
-                  return (
-                    // make each unit of table data an on click
-                    <td
-                      key={rowdex}
-                      id="game-boxes"
-                      // make each on click have a left and right
-                      onClick={() => this.leftClickOnly(codex, rowdex)}
-                      onContextMenu={() =>
-                        this.iGetStrawberriesAsAReward(codex, rowdex)
-                      }
-                    >
-                      {this.state.startGame[codex][rowdex]}
-                    </td>
-                  )
-                })}
-              </tr>
-            )
-          })}
-        </tbody>
+        <main>
+          <button onClick={() => this.resetGame}>Reset</button>
+          <tbody>
+            {this.state.startGame.map((column, codex) => {
+              // console.log(codex)
+              return (
+                // map through the rows - Done
+                <tr key={codex}>
+                  {this.state.startGame.map((row, rowdex) => {
+                    // console.log({ rowdex })
+                    return (
+                      // make each unit of table data an on click
+                      <td
+                        key={rowdex}
+                        id="game-boxes"
+                        // make each on click have a left and right
+                        onClick={() => this.leftClickOnly(codex, rowdex)}
+                        onContextMenu={() =>
+                          this.iGetStrawberriesAsAReward(codex, rowdex)
+                        }
+                      >
+                        {this.state.startGame[codex][rowdex]}
+                      </td>
+                    )
+                  })}
+                </tr>
+              )
+            })}
+          </tbody>
+        </main>
       </table>
     )
   }
