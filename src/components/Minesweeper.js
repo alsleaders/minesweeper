@@ -11,11 +11,7 @@ class Minesweeper extends Component {
 
   // turn off right click menu
   // constructor() {
-  //   turnOffMenu = event => {
-  //     event.preventDefault()
-  //   }
   // }
-
   componentDidMount() {
     fetch(`${stringInterpolationIsBananas}`, {
       method: 'POST',
@@ -86,6 +82,11 @@ class Minesweeper extends Component {
       })
   }
 
+  turnOffMenu = event => {
+    event.preventDefault()
+    iGetStrawberriesAsAReward((codex, rowdex))
+  }
+
   // make reset button
   resetGame = event => {
     this.setState = {
@@ -122,9 +123,7 @@ class Minesweeper extends Component {
                         id="game-boxes"
                         // make each on click have a left and right
                         onClick={() => this.leftClickOnly(codex, rowdex)}
-                        onContextMenu={() =>
-                          this.iGetStrawberriesAsAReward(codex, rowdex)
-                        }
+                        onContextMenu={() => this.turnOffMenu}
                       >
                         {this.state.startGame[codex][rowdex]}
                       </td>
