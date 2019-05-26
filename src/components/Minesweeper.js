@@ -60,8 +60,8 @@ class Minesweeper extends Component {
   }
   // does the flag on right click need to return an api call?
   // make right click flag
-  iGetStrawberriesAsAReward = (rowdex, codex) => {
-    // turnOffMenu(event)
+  iGetStrawberriesAsAReward = (event, rowdex, codex) => {
+    event.preventDefault()
     console.log(this.state.id)
     // console.log('did this work', rowdex, codex)
     // make the left return an api call
@@ -82,10 +82,10 @@ class Minesweeper extends Component {
       })
   }
 
-  turnOffMenu = event => {
-    event.preventDefault()
-    iGetStrawberriesAsAReward((codex, rowdex))
-  }
+  // turnOffMenu = event => {
+  //   event.preventDefault()
+  //   iGetStrawberriesAsAReward((codex, rowdex))
+  // }
 
   // make reset button
   resetGame = event => {
@@ -123,7 +123,9 @@ class Minesweeper extends Component {
                         id="game-boxes"
                         // make each on click have a left and right
                         onClick={() => this.leftClickOnly(codex, rowdex)}
-                        onContextMenu={() => this.turnOffMenu}
+                        onContextMenu={event =>
+                          this.iGetStrawberriesAsAReward(event, codex, rowdex)
+                        }
                       >
                         {this.state.startGame[codex][rowdex]}
                       </td>
