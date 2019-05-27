@@ -82,23 +82,14 @@ class Minesweeper extends Component {
       })
   }
 
-  // turnOffMenu = event => {
-  //   event.preventDefault()
-  //   iGetStrawberriesAsAReward((codex, rowdex))
-  // }
-
   // make reset button
-  resetGame = event => {
-    this.setState = {
-      startGame: [],
-      id: '',
-      state: ''
-    }
+  resetGame = () => {
+    console.log('are you resetting?')
+    // restart function
   }
   // style the flags and bombs
   // set up difficulty choice before componentDidMount loads - onChange for input or radio buttons
   // make a win/loss response
-  // restart button
   // have a win/loss counter (saved in local storage?)
   // sound effects?
 
@@ -107,7 +98,7 @@ class Minesweeper extends Component {
       // map through the columns - Done
       <table id="center-this">
         <main>
-          <button onClick={() => this.resetGame}>Reset</button>
+          <button onClick={this.resetGame}>Reset</button>
           <tbody>
             {this.state.startGame.map((column, codex) => {
               // console.log(codex)
