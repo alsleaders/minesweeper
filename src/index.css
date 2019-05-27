@@ -4,13 +4,23 @@
 
 html {
   height: 100%;
-  background: #0d21a1;
+  background: aliceblue;
 }
 
 body {
-  margin: 0;
+  margin: 5rem;
   min-height: 100%;
   text-align: center;
+  /* background-color: #0d21a1; */
+}
+
+main {
+  color: purple;
+  background-color: mediumaquamarine;
+  /* background: url('/src/images/fcc9aafd20f80901f9330d51aa33ad16.jpg'); */
+  border: solid salmon 2rem;
+  margin: 2rem;
+  padding: 2rem;
 }
 
 #center-this {

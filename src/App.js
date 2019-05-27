@@ -7,7 +7,6 @@ class App extends Component {
     return (
       <>
         <HelloWorld />
-        <p>Hopefully this is where the board is going</p>
         <Minesweeper />
       </>
     )

@@ -9,9 +9,6 @@ class Minesweeper extends Component {
     state: ''
   }
 
-  // turn off right click menu
-  // constructor() {
-  // }
   componentDidMount() {
     fetch(`${stringInterpolationIsBananas}`, {
       method: 'POST',
@@ -32,10 +29,15 @@ class Minesweeper extends Component {
         // console.log([game.board])
         this.setState({
           startGame: game.board,
-          id: game.id
+          id: game.id,
+          state: game.state
         })
       })
   }
+
+  // componentDidMount() {
+  //   loadGame()
+  // }
 
   leftClickOnly = (rowdex, codex) => {
     console.log(this.state.id)
@@ -54,9 +56,14 @@ class Minesweeper extends Component {
       .then(game => {
         console.log(game.state)
         this.setState({
-          startGame: game.board
+          startGame: game.board,
+          state: game.state
         })
       })
+    // if state changes to won or lost, display won or lost
+    // if (Object.value({ game.state }) == 'won' || Object.value({ game.state }) == 'lost') {
+    //   return <p>{this.state.game.state}</p>
+    // }
   }
   // does the flag on right click need to return an api call?
   // make right click flag
@@ -83,9 +90,14 @@ class Minesweeper extends Component {
   }
 
   // make reset button
-  resetGame = () => {
+  resetGame = event => {
     console.log('are you resetting?')
-    // restart function
+    this.setState({
+      startGame: [],
+      id: '',
+      state: ''
+    })
+    this.componentDidMount()
   }
   // style the flags and bombs
   // set up difficulty choice before componentDidMount loads - onChange for input or radio buttons
