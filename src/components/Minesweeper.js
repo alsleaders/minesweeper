@@ -1,24 +1,8 @@
 import React, { Component } from 'react'
 import EndLogic from './EndLogic'
+import ImageCell from './ImageCell'
 
 let stringInterpolationIsBananas = 'https://minesweeper-api.herokuapp.com/games'
-
-const checkBox = box => {
-  console.log('are we checking the boxes')
-  if (box === '_') {
-    return 'game-box reveal'
-  } else if (box === 'F') {
-    return 'game-box puppy-flag'
-  } else if (box === '*') {
-    return 'game-box puppy-bomb'
-  } else if (box === '@') {
-    return 'game-box cellFlagBomb'
-  } else if (1 <= box <= 9) {
-    return 'game-box number'
-  } else {
-    return 'game-box'
-  }
-}
 
 class Minesweeper extends Component {
   state = {
@@ -51,6 +35,23 @@ class Minesweeper extends Component {
           state: game.state
         })
       })
+  }
+
+  checkBox = box => {
+    console.log('are we checking the boxes', box)
+    if (box === '_') {
+      return 'game-box reveal'
+    } else if (box === 'F') {
+      return 'game-box puppy-flag'
+    } else if (box === '*') {
+      return 'game-box puppy-bomb'
+    } else if (box === '@') {
+      return 'game-box cellFlagBomb'
+    } else if (1 <= box && box <= 9) {
+      return 'game-box number'
+    } else {
+      return 'game-box'
+    }
   }
 
   leftClickOnly = (rowdex, codex) => {
@@ -141,14 +142,18 @@ class Minesweeper extends Component {
                         <td
                           key={rowdex}
                           id="game-boxes"
-                          className="{() => this.checkBox()}"
+                          className={this.checkBox(
+                            this.state.startGame[codex][rowdex]
+                          )}
                           // make each on click have a left and right
                           onClick={() => this.leftClickOnly(codex, rowdex)}
                           onContextMenu={event =>
                             this.iGetStrawberriesAsAReward(event, codex, rowdex)
                           }
                         >
-                          {this.state.startGame[codex][rowdex]}
+                          <ImageCell
+                            character={this.state.startGame[codex][rowdex]}
+                          />
                         </td>
                       )
                     })}

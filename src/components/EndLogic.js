@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 class EndLogic extends Component {
   render() {
+    console.log(this.props.status)
     let message = 'You are still playing'
     if (this.props.status === 'lost') {
       message = 'You lost, clean your shoes'
@@ -13,8 +14,6 @@ class EndLogic extends Component {
       <div>
         <p>How are you doing so far?</p>
         <h3>{message}</h3>
-        {/* if (this.props.state === 'lost') {"You've lost the game"} else if
-        (this.props.state === "won") {"You've won the game"} else {''} */}
       </div>
     )
   }

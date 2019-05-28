@@ -42,7 +42,7 @@ table {
   align-content: center;
 }
 
-#game-boxes {
+.game-box {
   border: groove gray 0.1rem;
   background-color: gray;
   margin: 0;
@@ -50,14 +50,19 @@ table {
 }
 
 .reveal {
-  background-color: bisque;
+  background-color: rgb(248, 234, 217);
 }
 .puppy-bomb {
   background-image: url('/src/images/poop-solid.svg');
   background-size: contain;
+  background: brown;
 }
 
 .puppy-flag {
   background-image: url('/src/images/dog-solid.svg');
   background-size: contain;
+}
+
+.small-font {
+  font-size: 6pt;
 }
