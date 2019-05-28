@@ -8,16 +8,24 @@ class Minesweeper extends Component {
   state = {
     startGame: [],
     id: '',
-    state: ''
+    state: '',
+    difficulty: 0
   }
 
-  componentDidMount() {
+  changeDifficulty = difficulty => {
+    console.log('can I change difficulty?', difficulty)
+    this.startGame(difficulty)
+    console.log('did you update the state of difficulty?')
+  }
+
+  startGame = difficulty => {
+    console.log('this is the start game function')
     fetch(`${stringInterpolationIsBananas}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ difficulty: 0 })
+      body: JSON.stringify({ difficulty: difficulty })
     })
       .then(response => {
         return response.json()
@@ -32,9 +40,15 @@ class Minesweeper extends Component {
         this.setState({
           startGame: game.board,
           id: game.id,
-          state: game.state
+          state: game.state,
+          difficulty
         })
       })
+  }
+
+  componentDidMount() {
+    console.log('did we change the board')
+    this.startGame()
   }
 
   checkBox = box => {
@@ -110,22 +124,14 @@ class Minesweeper extends Component {
     })
     this.componentDidMount()
   }
-  // style the flags and bombs
-  // set up difficulty choice before componentDidMount loads - onChange for input or radio buttons
-  // make a win/loss response
-  // have a win/loss counter (saved in local storage?)
-  // sound effects?
-
-  // end game logic:
-  // if state changes to won or lost, display won or lost
-  // if (Object.value({ state }) == 'won' || Object.value({ state }) == 'lost') {
-  //   return <p>{this.state.game.state}</p>
-  // }
 
   render() {
     return (
       // map through the columns - Done
       <>
+        <button onClick={() => this.changeDifficulty(0)}> Easy</button>
+        <button onClick={() => this.changeDifficulty(1)}> Medium</button>
+        <button onClick={() => this.changeDifficulty(2)}> Hard</button>
         <main className="background-here-please">
           <button onClick={this.resetGame}>Reset</button>
           <table id="center-this">
