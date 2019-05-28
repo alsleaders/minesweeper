@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import EndLogic from './EndLogic'
 
 let stringInterpolationIsBananas = 'https://minesweeper-api.herokuapp.com/games'
 
@@ -35,10 +36,6 @@ class Minesweeper extends Component {
       })
   }
 
-  // componentDidMount() {
-  //   loadGame()
-  // }
-
   leftClickOnly = (rowdex, codex) => {
     console.log(this.state.id)
     console.log('did this work', rowdex, codex)
@@ -60,10 +57,6 @@ class Minesweeper extends Component {
           state: game.state
         })
       })
-    // if state changes to won or lost, display won or lost
-    // if (Object.value({ game.state }) == 'won' || Object.value({ game.state }) == 'lost') {
-    //   return <p>{this.state.game.state}</p>
-    // }
   }
   // does the flag on right click need to return an api call?
   // make right click flag
@@ -105,12 +98,18 @@ class Minesweeper extends Component {
   // have a win/loss counter (saved in local storage?)
   // sound effects?
 
+  // end game logic:
+  // if state changes to won or lost, display won or lost
+  // if (Object.value({ state }) == 'won' || Object.value({ state }) == 'lost') {
+  //   return <p>{this.state.game.state}</p>
+  // }
+
   render() {
     return (
       // map through the columns - Done
-      <table id="center-this">
-        <main>
-          <button onClick={this.resetGame}>Reset</button>
+      <main>
+        <button onClick={this.resetGame}>Reset</button>
+        <table id="center-this">
           <tbody>
             {this.state.startGame.map((column, codex) => {
               // console.log(codex)
@@ -123,14 +122,28 @@ class Minesweeper extends Component {
                       // make each unit of table data an on click
                       <td
                         key={rowdex}
-                        id="game-boxes"
+                        className={this.checkBox{this.state.startGame[rowdex][codex]}}
                         // make each on click have a left and right
                         onClick={() => this.leftClickOnly(codex, rowdex)}
                         onContextMenu={event =>
                           this.iGetStrawberriesAsAReward(event, codex, rowdex)
                         }
                       >
-                        {this.state.startGame[codex][rowdex]}
+                        // {this.state.startGame[codex][rowdex]}
+                        checkBox = box => {
+                          if (box == '_') {
+                            return 'game-box reveal'
+                          } else if (box == 'F') {
+                            return 'game-box puppy-flag'
+                          } else if (box == '*') {
+                            return 'game-box puppy-bomb'
+                          } else if (box == '@') {
+                            return 'game-box cellFlagBomb'
+                          } else if (1 <= box <= 9) {
+                            return 'game-box number'
+                          } else {
+                            return 'game-box'
+                          }}
                       </td>
                     )
                   })}
@@ -138,8 +151,10 @@ class Minesweeper extends Component {
               )
             })}
           </tbody>
-        </main>
-      </table>
+        </table>
+        <EndLogic />
+        {this.state.state}
+      </main>
     )
   }
 }

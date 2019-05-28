@@ -4,7 +4,7 @@
 
 html {
   height: 100%;
-  background: aliceblue;
+  /* background: aliceblue; */
 }
 
 body {
@@ -14,10 +14,14 @@ body {
   /* background-color: #0d21a1; */
 }
 
-main {
+table {
   color: purple;
-  background-color: mediumaquamarine;
-  /* background: url('/src/images/fcc9aafd20f80901f9330d51aa33ad16.jpg'); */
+  /* background-color: mediumaquamarine; */
+  background-image: url('/src/images/bombbackground.jpg');
+  /* height: 20rem; */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   border: solid salmon 2rem;
   margin: 2rem;
   padding: 2rem;
@@ -29,9 +33,22 @@ main {
   align-content: center;
 }
 
-#game-boxes {
+.game-boxes {
   border: groove gray 0.1rem;
   background-color: gray;
   margin: 0;
   padding: 1rem;
+}
+
+.reveal {
+  background-color: bisque;
+}
+.puppy-bomb {
+  background-image: url('/src/images/poop-solid.svg');
+  background-size: contain;
+}
+
+.puppy-flag {
+  background-image: url('/src/images/dog-solid.svg');
+  background-size: contain;
 }
