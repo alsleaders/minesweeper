@@ -3,6 +3,23 @@ import EndLogic from './EndLogic'
 
 let stringInterpolationIsBananas = 'https://minesweeper-api.herokuapp.com/games'
 
+const checkBox = box => {
+  console.log('are we checking the boxes')
+  if (box === '_') {
+    return 'game-box reveal'
+  } else if (box === 'F') {
+    return 'game-box puppy-flag'
+  } else if (box === '*') {
+    return 'game-box puppy-bomb'
+  } else if (box === '@') {
+    return 'game-box cellFlagBomb'
+  } else if (1 <= box <= 9) {
+    return 'game-box number'
+  } else {
+    return 'game-box'
+  }
+}
+
 class Minesweeper extends Component {
   state = {
     startGame: [],
@@ -107,7 +124,7 @@ class Minesweeper extends Component {
   render() {
     return (
       // map through the columns - Done
-      <main>
+      <main className="background-here-please">
         <button onClick={this.resetGame}>Reset</button>
         <table id="center-this">
           <tbody>
@@ -122,28 +139,15 @@ class Minesweeper extends Component {
                       // make each unit of table data an on click
                       <td
                         key={rowdex}
-                        className={this.checkBox{this.state.startGame[rowdex][codex]}}
-                        // make each on click have a left and right
+                        id="game-boxes"
+                        className={checkBox()}
+                        // make each on click }have a left and right
                         onClick={() => this.leftClickOnly(codex, rowdex)}
                         onContextMenu={event =>
                           this.iGetStrawberriesAsAReward(event, codex, rowdex)
                         }
                       >
-                        // {this.state.startGame[codex][rowdex]}
-                        checkBox = box => {
-                          if (box == '_') {
-                            return 'game-box reveal'
-                          } else if (box == 'F') {
-                            return 'game-box puppy-flag'
-                          } else if (box == '*') {
-                            return 'game-box puppy-bomb'
-                          } else if (box == '@') {
-                            return 'game-box cellFlagBomb'
-                          } else if (1 <= box <= 9) {
-                            return 'game-box number'
-                          } else {
-                            return 'game-box'
-                          }}
+                        {this.state.startGame[codex][rowdex]}
                       </td>
                     )
                   })}
@@ -152,8 +156,10 @@ class Minesweeper extends Component {
             })}
           </tbody>
         </table>
-        <EndLogic />
-        {this.state.state}
+        <EndLogic
+        // state={this.state.state}
+        />
+        <h3>The state of the game is {this.state.state}</h3>
       </main>
     )
   }

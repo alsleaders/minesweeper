@@ -4,25 +4,30 @@
 
 html {
   height: 100%;
-  /* background: aliceblue; */
+  background: aliceblue;
 }
 
 body {
-  margin: 5rem;
+  margin: 2rem;
+  padding: 1rem;
   min-height: 100%;
   text-align: center;
+  border-radius: 1.5rem;
   /* background-color: #0d21a1; */
+  /* background: content-box radial-gradient(crimson, skyblue); */
 }
-
-table {
-  color: purple;
-  /* background-color: mediumaquamarine; */
-  background-image: url('/src/images/bombbackground.jpg');
-  /* height: 20rem; */
+.background-here-please {
+  background: no-repeat url(/dogpark.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  border: solid salmon 2rem;
+}
+
+table {
+  color: whitesmoke;
+  /* background-color: mediumaquamarine; */
+  /* height: 20rem; */
+  /* border: solid salmon 2rem; */
   margin: 2rem;
   padding: 2rem;
 }
@@ -33,7 +38,7 @@ table {
   align-content: center;
 }
 
-.game-boxes {
+#game-boxes {
   border: groove gray 0.1rem;
   background-color: gray;
   margin: 0;
