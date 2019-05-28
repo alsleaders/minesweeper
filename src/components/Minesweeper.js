@@ -159,7 +159,6 @@ class Minesweeper extends Component {
           </table>
         </main>
         <EndLogic status={this.state.state} />
-        {/* <h3>The state of the game is a {this.state.state} game</h3> */}
       </>
     )
   }
