@@ -140,8 +140,8 @@ class Minesweeper extends Component {
                       <td
                         key={rowdex}
                         id="game-boxes"
-                        className={checkBox()}
-                        // make each on click }have a left and right
+                        className="{() => this.checkBox()}"
+                        // make each on click have a left and right
                         onClick={() => this.leftClickOnly(codex, rowdex)}
                         onContextMenu={event =>
                           this.iGetStrawberriesAsAReward(event, codex, rowdex)
@@ -159,7 +159,7 @@ class Minesweeper extends Component {
         <EndLogic
         // state={this.state.state}
         />
-        <h3>The state of the game is {this.state.state}</h3>
+        <h3>The state of the game is a {this.state.state} game</h3>
       </main>
     )
   }

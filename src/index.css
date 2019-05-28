@@ -7,6 +7,10 @@ html {
   background: aliceblue;
 }
 
+h1 {
+  font-display: bolder;
+  padding: 1rem;
+}
 body {
   margin: 2rem;
   padding: 1rem;
@@ -14,7 +18,7 @@ body {
   text-align: center;
   border-radius: 1.5rem;
   /* background-color: #0d21a1; */
-  /* background: content-box radial-gradient(crimson, skyblue); */
+  background: content-box radial-gradient(peru, #0d21a1);
 }
 .background-here-please {
   background: no-repeat url(/dogpark.jpg);
