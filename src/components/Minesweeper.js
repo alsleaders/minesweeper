@@ -124,43 +124,43 @@ class Minesweeper extends Component {
   render() {
     return (
       // map through the columns - Done
-      <main className="background-here-please">
-        <button onClick={this.resetGame}>Reset</button>
-        <table id="center-this">
-          <tbody>
-            {this.state.startGame.map((column, codex) => {
-              // console.log(codex)
-              return (
-                // map through the rows - Done
-                <tr key={codex}>
-                  {this.state.startGame.map((row, rowdex) => {
-                    // console.log({ rowdex })
-                    return (
-                      // make each unit of table data an on click
-                      <td
-                        key={rowdex}
-                        id="game-boxes"
-                        className="{() => this.checkBox()}"
-                        // make each on click have a left and right
-                        onClick={() => this.leftClickOnly(codex, rowdex)}
-                        onContextMenu={event =>
-                          this.iGetStrawberriesAsAReward(event, codex, rowdex)
-                        }
-                      >
-                        {this.state.startGame[codex][rowdex]}
-                      </td>
-                    )
-                  })}
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-        <EndLogic
-        // state={this.state.state}
-        />
-        <h3>The state of the game is a {this.state.state} game</h3>
-      </main>
+      <>
+        <main className="background-here-please">
+          <button onClick={this.resetGame}>Reset</button>
+          <table id="center-this">
+            <tbody>
+              {this.state.startGame.map((column, codex) => {
+                // console.log(codex)
+                return (
+                  // map through the rows - Done
+                  <tr key={codex}>
+                    {this.state.startGame.map((row, rowdex) => {
+                      // console.log({ rowdex })
+                      return (
+                        // make each unit of table data an on click
+                        <td
+                          key={rowdex}
+                          id="game-boxes"
+                          className="{() => this.checkBox()}"
+                          // make each on click have a left and right
+                          onClick={() => this.leftClickOnly(codex, rowdex)}
+                          onContextMenu={event =>
+                            this.iGetStrawberriesAsAReward(event, codex, rowdex)
+                          }
+                        >
+                          {this.state.startGame[codex][rowdex]}
+                        </td>
+                      )
+                    })}
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </main>
+        <EndLogic status={this.state.state} />
+        {/* <h3>The state of the game is a {this.state.state} game</h3> */}
+      </>
     )
   }
 }

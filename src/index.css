@@ -21,7 +21,7 @@ body {
   background: content-box radial-gradient(peru, #0d21a1);
 }
 .background-here-please {
-  background: no-repeat url(/dogpark.jpg);
+  background: no-repeat url(./images/dogpark.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
