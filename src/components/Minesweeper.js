@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import EndLogic from './EndLogic'
 import ImageCell from './ImageCell'
 
-let stringInterpolationIsBananas = 'https://minesweeper-api.herokuapp.com/games'
+let API_URL = 'https://minesweeper-api.herokuapp.com/games'
 
 class Minesweeper extends Component {
   state = {
@@ -13,14 +13,11 @@ class Minesweeper extends Component {
   }
 
   changeDifficulty = difficulty => {
-    console.log('can I change difficulty?', difficulty)
     this.startGame(difficulty)
-    console.log('did you update the state of difficulty?')
   }
 
   startGame = difficulty => {
-    console.log('this is the start game function')
-    fetch(`${stringInterpolationIsBananas}`, {
+    fetch(`${API_URL}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -31,12 +28,6 @@ class Minesweeper extends Component {
         return response.json()
       })
       .then(game => {
-        // console.log({ game })
-        // console.log(game.id)
-        // console.log(game.mines)
-        // console.log(game.state)
-        // console.log(game.board)
-        // console.log([game.board])
         this.setState({
           startGame: game.board,
           id: game.id,
@@ -47,7 +38,6 @@ class Minesweeper extends Component {
   }
 
   componentDidMount() {
-    console.log('did we change the board')
     this.startGame()
   }
 
@@ -70,9 +60,7 @@ class Minesweeper extends Component {
 
   leftClickOnly = (rowdex, codex) => {
     console.log(this.state.id)
-    console.log('did this work', rowdex, codex)
-    // make the left return an api call
-    fetch(`${stringInterpolationIsBananas}/${this.state.id}/check`, {
+    fetch(`${API_URL}/${this.state.id}/check`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -83,21 +71,15 @@ class Minesweeper extends Component {
         return response.json()
       })
       .then(game => {
-        console.log(game.state)
         this.setState({
           startGame: game.board,
           state: game.state
         })
       })
   }
-  // does the flag on right click need to return an api call?
-  // make right click flag
-  iGetStrawberriesAsAReward = (event, rowdex, codex) => {
+  rightClickOnly = (event, rowdex, codex) => {
     event.preventDefault()
-    console.log(this.state.id)
-    // console.log('did this work', rowdex, codex)
-    // make the left return an api call
-    fetch(`${stringInterpolationIsBananas}/${this.state.id}/flag`, {
+    fetch(`${API_URL}/${this.state.id}/flag`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -114,9 +96,7 @@ class Minesweeper extends Component {
       })
   }
 
-  // make reset button
   resetGame = event => {
-    console.log('are you resetting?')
     this.setState({
       startGame: [],
       id: '',
@@ -127,7 +107,6 @@ class Minesweeper extends Component {
 
   render() {
     return (
-      // map through the columns - Done
       <>
         <button onClick={() => this.changeDifficulty(0)}> Easy</button>
         <button onClick={() => this.changeDifficulty(1)}> Medium</button>
@@ -137,24 +116,19 @@ class Minesweeper extends Component {
           <table id="center-this">
             <tbody>
               {this.state.startGame.map((column, codex) => {
-                // console.log(codex)
                 return (
-                  // map through the rows - Done
                   <tr key={codex}>
                     {this.state.startGame.map((row, rowdex) => {
-                      // console.log({ rowdex })
                       return (
-                        // make each unit of table data an on click
                         <td
                           key={rowdex}
                           id="game-boxes"
                           className={this.checkBox(
                             this.state.startGame[codex][rowdex]
                           )}
-                          // make each on click have a left and right
                           onClick={() => this.leftClickOnly(codex, rowdex)}
                           onContextMenu={event =>
-                            this.iGetStrawberriesAsAReward(event, codex, rowdex)
+                            this.rightClickOnly(event, codex, rowdex)
                           }
                         >
                           <ImageCell
