@@ -1,5 +1,7 @@
 # Minesweeper
 
+<a href="https://minesweeper-palep.netlify.com/">
+
 <img src="./src/images/Minesweeper.png">
 
 This game is a classic and I was inspired to this design after taking my dogs to the park.
