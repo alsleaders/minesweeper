@@ -1,6 +1,6 @@
 # Minesweeper
 
-<a href="https://minesweeper-palep.netlify.com/">
+<a href="https://minesweeper-palep.netlify.com/">Link</a>
 
 <img src="./src/images/Minesweeper.png">
 
